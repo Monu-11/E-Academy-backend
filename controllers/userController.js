@@ -104,7 +104,6 @@ export const updateProfile = catchAsyncError(async (req, res, next) => {
   const { name, email } = req.body;
 
   const user = await User.findById(req.user._id);
-  console.log(user);
   if (name) user.name = name;
   if (email) user.email = email;
 
