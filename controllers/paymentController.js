@@ -46,8 +46,6 @@ export const paymentVerification = catchAsyncError(async (req, res, next) => {
 
   const isAuthentic = generated_signature === razorpay_signature;
 
-  console.log("isAuthentic:", isAuthentic);
-
   if (!isAuthentic)
     return res.redirect(`${process.env.FRONTEND_URL}/paymentfail`);
   // database comes here
@@ -79,13 +77,13 @@ export const cancelSubscription = catchAsyncError(async (req, res, next) => {
   const subscriptionId = user.subscription.id;
   let refund = false;
 
-  await instance.subscription.cancel(subscriptionId);
+  await instance.subscriptions.cancel(subscriptionId);
 
   const payment = await Payment.findOne({
     razorpay_subscription_id: subscriptionId,
   });
 
-  const gap = Date.now().payment.createdAt;
+  const gap = Date.now() - payment.createdAt;
 
   const refundTime = process.env.REFUND_DAYS * 24 * 60 * 60 * 1000;
 
