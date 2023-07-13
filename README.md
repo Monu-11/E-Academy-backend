@@ -1,4 +1,5 @@
-#E-Academy Backend
+E-Academy - Backend
+
 This is the backend for the E-Academy website. It allows users to subscribe to premium content, which they can then access through the website. Payment is processed through RazorPay.
 
 About
